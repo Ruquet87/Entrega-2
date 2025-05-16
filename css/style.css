@@ -373,6 +373,7 @@ footer {
   flex: 1;
   margin: 2rem;
   padding: 2rem;
+  align-items: center;
 }
 
 form {
@@ -409,18 +410,21 @@ form button:hover {
   font-size: 18px;
 }
 
-.campos input,
-.campos textarea {
+input,
+textarea {
   width: 100%;
-  font-size: 1rem;
+  padding: 0.75rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
+  font-family: "TuTipografiaPrincipal", sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.3s;
 }
 
-.campos textarea {
-  width: 27rem;
-  height: 4rem;
-  resize: both;
+input:focus,
+textarea:focus {
+  border-color: #b67b4b; /* tono similar a tu sitio */
+  outline: none;
 }
 
 .contenedor-boton {
@@ -660,6 +664,7 @@ form button:hover {
 
   form {
     gap: 2rem;
+    width: 100%;
   }
 
   .fila-formulario {
