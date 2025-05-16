@@ -208,7 +208,7 @@ footer {
 }
 
 .formacion h2 {
-  font-family: "fuentetitulo";
+  font-family: "FuenteTitulo";
   color: rgb(243, 225, 202);
   text-decoration: underline;
 }
@@ -381,7 +381,7 @@ form {
   color: rgb(123, 170, 155);
   margin: 1rem;
   padding: 1rem;
-  gap: 6rem;
+  gap: 2rem;
 }
 
 form button {
@@ -416,14 +416,14 @@ textarea {
   padding: 0.75rem;
   border: 1px solid #ccc;
   border-radius: 8px;
-  font-family: "TuTipografiaPrincipal", sans-serif;
+  font-family: sans-serif;
   font-size: 1rem;
   transition: border-color 0.3s;
 }
 
 input:focus,
 textarea:focus {
-  border-color: #b67b4b; /* tono similar a tu sitio */
+  border-color: #b67b4b;
   outline: none;
 }
 
