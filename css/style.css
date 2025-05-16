@@ -336,7 +336,6 @@ footer {
 #main-contacto {
   display: flex;
   justify-content: space-around;
-  gap: 2rem;
 }
 
 .info-contacto p {
@@ -636,7 +635,6 @@ form {
   #main-contacto {
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
   }
 
   .info-contacto,
@@ -664,7 +662,6 @@ form {
 @media (max-width: 767px) {
   #main-contacto {
     flex-direction: column;
-    gap: 2rem;
   }
 
   .info-contacto {
