@@ -1,0 +1,607 @@
+// Variables
+$color-bg-body: #161411;
+$color-bg-footer: rgb(39, 38, 36);
+$color-footer-border: rgb(77, 23, 23);
+$color-text-primary: antiquewhite;
+$color-text-secondary: rgb(123, 170, 155);
+$color-accent: rgb(228, 163, 66);
+$color-accent-hover: rgb(243, 199, 123);
+$color-section-bg: #26221c;
+$font-fam-primary: "Raleway", sans-serif;
+$font-fam-title: "FuenteTitulo";
+$font-size-h1: 45px;
+
+// Mixins
+@mixin flex-center(
+  $direction: row,
+  $justify: center,
+  $align: center,
+  $wrap: nowrap,
+  $gap: 0
+) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+  gap: $gap;
+}
+
+@mixin grid-layout(
+  $cols,
+  $rows: auto,
+  $areas: null,
+  $gap: 1rem,
+  $align: center
+) {
+  display: grid;
+  grid-template-columns: $cols;
+  grid-template-rows: $rows;
+  @if $areas != null {
+    grid-template-areas: $areas;
+  }
+  gap: $gap;
+  align-items: $align;
+}
+
+// Extends
+%btn-style {
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+// Global reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: $font-fam-title;
+  src: url(../font/Revalia-Regular.ttf);
+}
+
+body {
+  background-color: $color-bg-body;
+  font-family: $font-fam-primary;
+}
+
+// INDEX
+
+header {
+  background-image: url(../images/cuerdas-guitarra-980x478.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-bottom: 3px solid $color-footer-border;
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    background-position: center;
+    height: 9rem;
+  }
+}
+
+main {
+  min-height: 100vh;
+  padding-top: 150px;
+
+  .presentacion {
+    padding: 3rem;
+
+    p {
+      color: $color-text-secondary;
+      padding: 1.5rem;
+      font-size: 25px;
+
+      @media (min-width: 768px) and (max-width: 1023px) {
+        font-size: 1.2rem;
+      }
+      @media (max-width: 767px) {
+        font-size: 1rem;
+        padding: 1rem;
+      }
+    }
+
+    h1 {
+      color: $color-text-primary;
+      font-family: $font-fam-title;
+      font-size: $font-size-h1;
+
+      @media (min-width: 768px) and (max-width: 1023px) {
+        font-size: 2rem;
+      }
+      @media (max-width: 767px) {
+        font-size: 1.8rem;
+      }
+    }
+  }
+
+  .contenido {
+    @include flex-center(row, space-between, center, wrap, 2rem);
+
+    @media (max-width: 1023px) {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container-texto,
+    .container-video {
+      flex: 1;
+      min-width: 300px;
+
+      @media (max-width: 1023px) {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    .container-video {
+      aspect-ratio: 16 / 9;
+      height: 100%;
+
+      .video-presentacion {
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 8px;
+      }
+    }
+  }
+}
+
+// FOOTER
+
+footer {
+  background-color: $color-bg-footer;
+  padding: 1rem;
+  @include grid-layout(
+    1fr 2fr 1fr,
+    auto auto,
+    "logo info mapa" "copyright copyright copyright",
+    1rem,
+    center
+  );
+  color: $color-text-primary;
+  border-top: 3px solid $color-footer-border;
+
+  .logo-footer {
+    grid-area: logo;
+    width: 100px;
+    border-radius: 100px;
+    border: 2px solid $color-bg-body;
+    justify-self: center;
+  }
+
+  #maps {
+    grid-area: mapa;
+    width: 75%;
+    height: 150px;
+    border-radius: 10px;
+  }
+
+  .info-footer {
+    grid-area: info;
+    @include flex-center(row, space-evenly, center, wrap);
+
+    h2 {
+      font-size: 18px;
+      margin-bottom: 0.5rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    a,
+    li {
+      font-size: 16px;
+      color: $color-text-primary;
+      text-decoration: none;
+      @include flex-center(row, flex-start, center, nowrap, 8px);
+    }
+
+    .ti {
+      font-size: 1.5rem;
+      color: $color-accent;
+    }
+  }
+
+  .copyright {
+    grid-area: copyright;
+    font-size: 0.8rem;
+    justify-self: center;
+    margin-top: 1rem;
+  }
+
+  // Media Queries Footer
+
+  @media (min-width: 1024px) {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "logo info mapa"
+      "copyright copyright copyright";
+    gap: 1rem;
+    align-items: center;
+
+    .logo-footer {
+      width: 100px;
+    }
+
+    .info-footer {
+      flex-direction: row;
+      justify-content: space-evenly;
+      gap: 1rem;
+    }
+
+    #maps {
+      width: 75%;
+      height: 150px;
+    }
+
+    .copyright {
+      justify-self: center;
+      margin-top: 1rem;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+
+    .logo-footer {
+      width: 80px;
+    }
+
+    .info-footer {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    #maps {
+      width: 90%;
+      height: 180px;
+    }
+
+    .copyright {
+      justify-self: center;
+      margin-top: 1rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+
+    .logo-footer {
+      width: 80px;
+    }
+
+    .info-footer {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    #maps {
+      width: 90%;
+      height: 180px;
+    }
+
+    .copyright {
+      margin-top: 1rem;
+      justify-self: center;
+    }
+  }
+}
+
+// SOBRE MI
+
+.info-sobre-mi {
+  @include flex-center(row, flex-start, stretch, wrap);
+  padding: 3rem;
+
+  .sobre-mi {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    p {
+      color: $color-text-secondary;
+      padding: 1.5rem;
+      font-size: 22px;
+    }
+  }
+
+  .formacion {
+    @include flex-center(row, space-between, nowrap, 1rem);
+    margin: 50px 0 0 0;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      margin: 1rem 0;
+    }
+
+    .estudios,
+    .aprendizaje {
+      flex: 1;
+      background-color: $color-section-bg;
+      padding: 1rem;
+      border-radius: 10px;
+      color: $color-text-primary;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      margin: 0 1rem;
+
+      p {
+        margin-right: 80px;
+
+        @media (max-width: 768px) {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  h1 {
+    color: $color-text-primary;
+  }
+
+  .formacion h2 {
+    font-family: $font-fam-title;
+    color: rgb(243, 225, 202);
+    text-decoration: underline;
+  }
+
+  .imagen-sobre-mi {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    height: 700px;
+    padding: 1rem;
+
+    img {
+      border-radius: 2rem;
+
+      @media (max-width: 768px) {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      order: -1;
+      height: auto;
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+// PRODUCTOS
+
+.titulos-productos {
+  margin: 3rem;
+}
+
+#productos {
+  h1 {
+    color: $color-text-primary;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    color: $color-text-secondary;
+  }
+
+  .grilla-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+  .producto {
+    background-color: $color-section-bg;
+    padding: 1rem;
+    border-radius: 10px;
+    color: $color-text-primary;
+    text-align: left;
+
+    img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: $color-text-secondary;
+    }
+  }
+}
+
+// SERVICIOS
+
+#servicios {
+  padding: 3rem;
+
+  h1 {
+    color: $color-text-primary;
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    color: $color-text-secondary;
+    font-size: 1.5rem;
+    margin-left: 1rem;
+  }
+
+  .grilla-servicios {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+  .servicio {
+    background-color: $color-section-bg;
+    padding: 1rem;
+    border-radius: 10px;
+    color: $color-text-primary;
+    text-align: left;
+
+    img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: $color-text-primary;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
+      color: $color-text-secondary;
+    }
+  }
+}
+
+// CONTACTO
+
+#main-contacto {
+  @include flex-center(row, space-around, center);
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info-contacto {
+    display: grid;
+    flex: 1;
+    margin: 2rem;
+    padding: 2rem;
+    align-items: center;
+    justify-content: space-around;
+    align-content: center;
+
+    h1 {
+      color: $color-text-primary;
+      font-size: 6rem;
+      margin-bottom: 80px;
+    }
+
+    p {
+      color: $color-text-secondary;
+      padding: 1rem;
+      font-size: 2rem;
+    }
+
+    @media (max-width: 767px) {
+      text-align: center;
+    }
+
+    @media (max-width: 1024px) {
+      width: 100%;
+      padding: 1rem;
+    }
+  }
+
+  .formulario-contacto {
+    @include flex-center(row, center, center);
+    flex: 1;
+    margin: 2rem;
+    padding: 2rem;
+
+    form {
+      display: grid;
+      color: $color-text-secondary;
+      margin: 1rem;
+      padding: 1rem;
+      gap: 2rem;
+
+      button {
+        @extend %btn-style;
+        background-color: $color-accent;
+        color: $color-bg-body;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+
+        &:hover {
+          background-color: $color-accent-hover;
+        }
+      }
+
+      .fila-formulario {
+        @include flex-center(row, flex-start, center, nowrap, 3rem);
+
+        @media (max-width: 570px) {
+          flex-direction: column;
+          gap: 1rem;
+        }
+      }
+
+      .campos {
+        display: grid;
+        gap: 1rem;
+        font-size: 18px;
+
+        /* Agregado para que los campos ocupen 100% en responsive */
+        @media (max-width: 1024px) {
+          width: 100%;
+        }
+
+        input,
+        textarea {
+          width: 100%;
+          padding: 0.75rem;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          font-family: sans-serif;
+          font-size: 1rem;
+          transition: border-color 0.3s;
+
+          &:focus {
+            border-color: #b67b4b;
+            outline: none;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 1024px) {
+      width: 100%;
+      padding: 1rem;
+    }
+  }
+}
